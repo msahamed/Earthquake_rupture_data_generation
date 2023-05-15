@@ -1,0 +1,23 @@
+\begin{thebibliography}{1}
+
+\bibitem{sutton2018reinforcement}
+Richard~S Sutton and Andrew~G Barto.
+\newblock {\em Reinforcement learning: An introduction}.
+\newblock MIT press, 2018.
+
+\bibitem{ahamed2021application}
+Sabber Ahamed and Eric~G Daub.
+\newblock Application of machine learning techniques to predict rupture propagation and arrest in 2-d dynamic earthquake simulations.
+\newblock {\em Geophysical Journal International}, 224(3):1918--1929, 2021.
+
+\bibitem{fdfaultEricGithub}
+Eric~G Daub.
+\newblock Finite difference code for earthquake faulting.
+\newblock \url{https://github.com/egdaub/fdfault/commit/b74a11b71a790e4457818827a94b4b8d3aee7662}, 2017.
+
+\bibitem{schulman2017proximal}
+John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov.
+\newblock Proximal policy optimization algorithms.
+\newblock {\em arXiv preprint arXiv:1707.06347}, 2017.
+
+\end{thebibliography}

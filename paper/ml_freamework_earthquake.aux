@@ -2,13 +2,10 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
-\global\let\oldcontentsline\contentsline
-\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
-\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -16,16 +13,47 @@
 \gdef\HyperFirstAtBeginDocument#1{#1}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{bishop2006pattern}
+\citation{sutton2018reinforcement}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\citation{sutton2018reinforcement}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Generator Framework}{2}{section.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Overview}{2}{subsection.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Supervised Model: predict the outcome of simulations}{2}{subsection.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Generator: generate simulation-like data}{2}{subsection.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Agent: optimize generator to maximize the outcome}{3}{subsection.2.4}\protected@file@percent }
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Optimizing Simulations using the Machine Learning Framework}}{4}{algorithm.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces The schematic diagram shows how the framework works}}{2}{figure.1}\protected@file@percent }
+\newlabel{fig:bnn-diagram}{{1}{2}{The schematic diagram shows how the framework works}{figure.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Supervised Model: Predicting the Outcome of Simulations}{3}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}RL Agent: Generate simulation like data}{3}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.1}Reward Function}{3}{subsubsection.2.3.1}\protected@file@percent }
+\citation{sutton2018reinforcement}
+\citation{ahamed2021application}
+\citation{fdfaultEricGithub}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.2}Policy Learning for Data Generation}{4}{subsubsection.2.3.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3}Case Studies}{4}{section.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Material Science}{4}{subsection.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Earthquake Rupture Physics}{4}{subsection.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Discussion and Future Work}{4}{section.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{4}{section.5}\protected@file@percent }
-\gdef \@abspage@last{4}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Earthquake Rupture Physics}{4}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}Rupture simulations and data processing}{4}{subsubsection.3.1.1}\protected@file@percent }
+\citation{schulman2017proximal}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces A zoomed view of the two-dimensional fault geometry (not to the scale). The domain is 32 km long along the strike of the fault and 24 kilometers wide across the fault. The rupture starts to nucleate 10 km to the left of the barrier and propagates from the hypocenter towards the barrier}}{5}{figure.2}\protected@file@percent }
+\newlabel{fig:rupture_domain}{{2}{5}{A zoomed view of the two-dimensional fault geometry (not to the scale). The domain is 32 km long along the strike of the fault and 24 kilometers wide across the fault. The rupture starts to nucleate 10 km to the left of the barrier and propagates from the hypocenter towards the barrier}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.2}Supervised Model to Predict Earthquake Rupture}{5}{subsubsection.3.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.3}Reinforcement Learning to Generate Rupture Parameters}{5}{subsubsection.3.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.4}Results and Insights}{6}{subsubsection.3.1.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Histogram plot representing rupture outcomes. (a) displays the distribution of outcomes in the original training data, which are confined to binary labels of 0 and 1, signifying specific classes of rupture. (b) illustrates the outcomes generated by reinforcement learning agent, which are spread continuously over a range from 0 to 1.}}{6}{figure.3}\protected@file@percent }
+\newlabel{fig:label_distribution}{{3}{6}{Histogram plot representing rupture outcomes. (a) displays the distribution of outcomes in the original training data, which are confined to binary labels of 0 and 1, signifying specific classes of rupture. (b) illustrates the outcomes generated by reinforcement learning agent, which are spread continuously over a range from 0 to 1}{figure.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces 2D scatter distribution plot of training and generated data, showing (a) Height and Width, and (b) Normal Stresses. The generated data exhibits a normal distribution due to the characteristics of our reinforcement learning (RL) environment. In the RL environment, the state is initialized and updated with a random draw from a standard normal distribution.}}{7}{figure.4}\protected@file@percent }
+\newlabel{fig:height_width_stress_scatter}{{4}{7}{2D scatter distribution plot of training and generated data, showing (a) Height and Width, and (b) Normal Stresses. The generated data exhibits a normal distribution due to the characteristics of our reinforcement learning (RL) environment. In the RL environment, the state is initialized and updated with a random draw from a standard normal distribution}{figure.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Plot shows the contour of the rupture outcome. (a) height and width (b) normal and shear stress}}{7}{figure.5}\protected@file@percent }
+\newlabel{fig:contour}{{5}{7}{Plot shows the contour of the rupture outcome. (a) height and width (b) normal and shear stress}{figure.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Material Science}{8}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Simulations and data processing}{8}{subsubsection.3.2.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Schematic diagram illustrating a simulation cell used for nanoindentation and scratching. The layers are numbered 1-4 from top to bottom. Only the thickness of layer 2 was varied.}}{8}{figure.6}\protected@file@percent }
+\newlabel{fig:material_design_domian}{{6}{8}{Schematic diagram illustrating a simulation cell used for nanoindentation and scratching. The layers are numbered 1-4 from top to bottom. Only the thickness of layer 2 was varied}{figure.6}{}}
+\bibstyle{unsrt}
+\bibdata{references}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Supervised Learning to Generate Material Data}{9}{subsubsection.3.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Limitations}{9}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Conclusion and Future Work}{9}{section.4}\protected@file@percent }
+\bibcite{sutton2018reinforcement}{1}
+\bibcite{ahamed2021application}{2}
+\bibcite{fdfaultEricGithub}{3}
+\bibcite{schulman2017proximal}{4}
+\gdef \@abspage@last{10}

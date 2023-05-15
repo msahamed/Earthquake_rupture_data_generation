@@ -1,2 +1,5 @@
 models
 logs
+mlruns
+.DS_Store
+paper/ml_freamework_earthquake.aux
