@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -13,7 +16,6 @@
 \gdef\HyperFirstAtBeginDocument#1{#1}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
-\citation{bishop2006pattern}
 \citation{sutton2018reinforcement}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
 \citation{sutton2018reinforcement}
@@ -25,6 +27,7 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}RL Agent: Generate simulation like data}{3}{subsection.2.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.1}Reward Function}{3}{subsubsection.2.3.1}\protected@file@percent }
 \citation{sutton2018reinforcement}
+\citation{ahamed2019estimating}
 \citation{ahamed2021application}
 \citation{fdfaultEricGithub}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.2}Policy Learning for Data Generation}{4}{subsubsection.2.3.2}\protected@file@percent }
@@ -43,17 +46,26 @@
 \newlabel{fig:height_width_stress_scatter}{{4}{7}{2D scatter distribution plot of training and generated data, showing (a) Height and Width, and (b) Normal Stresses. The generated data exhibits a normal distribution due to the characteristics of our reinforcement learning (RL) environment. In the RL environment, the state is initialized and updated with a random draw from a standard normal distribution}{figure.4}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Plot shows the contour of the rupture outcome. (a) height and width (b) normal and shear stress}}{7}{figure.5}\protected@file@percent }
 \newlabel{fig:contour}{{5}{7}{Plot shows the contour of the rupture outcome. (a) height and width (b) normal and shear stress}{figure.5}{}}
+\citation{uddin2023finite,uddin2020studying,uddinstudy,mesbah2023study}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Material Science}{8}{subsection.3.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Simulations and data processing}{8}{subsubsection.3.2.1}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Schematic diagram illustrating a simulation cell used for nanoindentation and scratching. The layers are numbered 1-4 from top to bottom. Only the thickness of layer 2 was varied.}}{8}{figure.6}\protected@file@percent }
 \newlabel{fig:material_design_domian}{{6}{8}{Schematic diagram illustrating a simulation cell used for nanoindentation and scratching. The layers are numbered 1-4 from top to bottom. Only the thickness of layer 2 was varied}{figure.6}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Supervised Learning to Generate Material Data}{9}{subsubsection.3.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Predicted frictional coefficient along the scratching distance for the test data on different models test simulations. Each unique model name, like '6\_2\_9\_1\_d7\_r10', encodes key properties: '6\_2\_9\_1\_' corresponds to the thickness of each material layer, 'd7' specifies a 7 nm indenter depth, and 'r10' represents a 10 nm indenter radius.}}{9}{figure.7}\protected@file@percent }
+\newlabel{fig:material_fric_pred}{{7}{9}{Predicted frictional coefficient along the scratching distance for the test data on different models test simulations. Each unique model name, like '6\_2\_9\_1\_d7\_r10', encodes key properties: '6\_2\_9\_1\_' corresponds to the thickness of each material layer, 'd7' specifies a 7 nm indenter depth, and 'r10' represents a 10 nm indenter radius}{figure.7}{}}
 \bibstyle{unsrt}
 \bibdata{references}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Supervised Learning to Generate Material Data}{9}{subsubsection.3.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Limitations}{9}{subsection.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Conclusion and Future Work}{9}{section.4}\protected@file@percent }
-\bibcite{sutton2018reinforcement}{1}
-\bibcite{ahamed2021application}{2}
-\bibcite{fdfaultEricGithub}{3}
-\bibcite{schulman2017proximal}{4}
-\gdef \@abspage@last{10}
+\bibcite{sutton2018reinforcement}{{1}{}{{}}{{}}}
+\bibcite{ahamed2019estimating}{{2}{}{{}}{{}}}
+\bibcite{ahamed2021application}{{3}{}{{}}{{}}}
+\bibcite{fdfaultEricGithub}{{4}{}{{}}{{}}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Limitations}{10}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Conclusion and Future Work}{10}{section.4}\protected@file@percent }
+\bibcite{schulman2017proximal}{{5}{}{{}}{{}}}
+\bibcite{uddin2023finite}{{6}{}{{}}{{}}}
+\bibcite{uddin2020studying}{{7}{}{{}}{{}}}
+\bibcite{uddinstudy}{{8}{}{{}}{{}}}
+\bibcite{mesbah2023study}{{9}{}{{}}{{}}}
+\providecommand\NAT@force@numbers{}\NAT@force@numbers
+\gdef \@abspage@last{11}

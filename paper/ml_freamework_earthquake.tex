@@ -4,6 +4,7 @@
 \usepackage{hyperref}
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{natbib}
 \usepackage{graphicx}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
@@ -31,7 +32,7 @@
 
 Understanding physical systems or processes often involves the use of computational simulations, a method that can be both time-consuming and computationally expensive. These constraints can severely limit the amount of data available for research and impact our ability to gain deep insights into these systems or processes.
 
-In response to these challenges, we propose a novel machine learning-based generator framework designed to enhance the efficiency of data generation in studies that rely on simulations. This framework operates in a two-step approach. Initially, a supervised predictive model is trained using a small-scale simulated dataset with varying input parameters \cite{bishop2006pattern}. This predictive model, functioning as a surrogate for the original physical simulations, is then used to train a reinforcement learning (RL) agent \cite{sutton2018reinforcement}. The RL agent, guided by the feedback from the predictive model, learns to generate more accurate, simulation-like data.
+In response to these challenges, we propose a novel machine learning-based generator framework designed to enhance the efficiency of data generation in studies that rely on simulations. This framework operates in a two-step approach. Initially, a supervised predictive model is trained using a small-scale simulated dataset with varying input parameters. This predictive model, functioning as a surrogate for the original physical simulations, is then used to train a reinforcement learning (RL) agent \cite{sutton2018reinforcement}. The RL agent, guided by the feedback from the predictive model, learns to generate more accurate, simulation-like data.
 
 The key advantage of this framework is that it facilitates the generation of larger quantities of data without the need for further high computational simulations. This allows researchers to explore the parameter space more efficiently, thereby gaining deeper insights into the physical systems or processes under study. Furthermore, by employing a reinforcement learning approach, our framework can continually adapt and improve over time, offering the potential for even greater accuracy and efficiency in future data generation.
 
@@ -92,7 +93,7 @@ Through iterative updates of the value function and the policy, guided by the Be
 In this section, we will demonstrate the application and effectiveness of our framework through a series of case studies. The first case study focuses on the field of earthquake rupture physics, a complex and data-scarce area that significantly benefits from our approach. The second case study focuses on the field of material science, where our framework can be used to optimize processing conditions for developing high-performance materials.
 
 \subsection{Earthquake Rupture Physics}
-Simulating dynamic earthquake rupture propagation poses significant challenges due to uncertainties in fault slip physics, stress conditions, and frictional properties. Numerical simulations, while essential in understanding rupture physics, are highly dependent on initial parameters, which are difficult to optimize given the vast parameter space. As a result,researchers often resort to simplifying assumptions or trial-and-error methods to generate simulations that can overlook complexities and are computationally expensive.
+Simulating dynamic earthquake rupture propagation poses significant challenges due to uncertainties in fault slip physics, stress conditions, and frictional properties. Numerical simulations, while essential in understanding rupture physics, are highly dependent on initial parameters, which are difficult to optimize given the vast parameter space. As a result,researchers often resort to simplifying assumptions or trial-and-error methods to generate simulations that can overlook complexities and are computationally expensive~\cite{ahamed2019estimating}.
 
 \subsubsection{Rupture simulations and data processing}
 \begin{figure}[ht]
@@ -161,7 +162,7 @@ The results, illustrated by the contour plots (Figure-\ref{fig:contour}), unders
 \subsection{Material Science}
 Material design involves searching for the best solutions by exploring the design space using
 material composition and hierarchical structure. Molecular dynamics (MD) simulations have been
-employed to understand mechanical properties and design materials at the atomic and molecular level, but
+employed to understand mechanical properties and design materials at the atomic and molecular level~\citep{uddin2023finite, uddin2020studying, uddinstudy,mesbah2023study}, but
 their computational and time constraints limit their application to a few nanoscale simulations, failing to
 provide a comprehensive understanding. This approach also overlooks the mechanical behavior of
 materials at larger scales which is relevant to their applications. To overcome this limitation, machine
@@ -192,6 +193,22 @@ depending on the penetration depth). The indenter speed was set to 100 m/s for n
 m/s for nano-scratching, with a scratching length of 20 nm.
 
 \subsubsection{Supervised Learning to Generate Material Data}
+We developed a supervised learning model to predict the frictional coefficient along the scratching distance.
+The model was trained on 23 of these models, validated on 5, and tested on the remaining 7 models. To create a unique model, we combined the model layers with indenter radius and penetration depth. Then for each model, we collected frictional coefficient from different scratching data points.
+
+\begin{figure}[!h]
+    \begin{center}
+        \includegraphics[scale=0.30]{figures/material_fric_pred.png}
+    \end{center}
+    \caption{Predicted frictional coefficient along the scratching distance for the test data on different models test simulations. Each unique model name, like '6\_2\_9\_1\_d7\_r10', encodes key properties: '6\_2\_9\_1\_' corresponds to the thickness of each material layer, 'd7' specifies a 7 nm indenter depth, and 'r10' represents a 10 nm indenter radius.}
+
+    \label{fig:material_fric_pred}
+\end{figure}
+
+The performance of the supervised learning model was robust, with an R-squared value of 0.9581, a Mean Squared Error of 0.0030, Root Mean Squared Error of 0.0550 and Mean Absolute Error of 0.0455 on the test data.
+
+
+Figure-\ref{fig:material_fric_pred} displays the predicted frictional coefficient over the course of scratching for various test models. Despite the limited size of the training dataset, the model appears to predict well across the test simulations. However, the figure also indicates a difficulty in accurately predicting models with larger indenter radius, as exemplified by the model where intender raius is 20.
 
 
 \subsection{Limitations}
