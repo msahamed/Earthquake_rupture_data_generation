@@ -11,26 +11,27 @@
 
 \title{Addressing computational challenges in physical system simulations with machine learning}
 \author{
-    Sabber Ahamed$^1$, Md Mesbah Uddin$^2$ \\
-    % Asurion\\
-    % Nashville, TN 38152 \\
-    \texttt{$^1$sabbers@gmail.com}, \texttt{$^2$Mesbahuddin1991@gmail.com} \\
+    Sabber Ahamed$^{1,*}$, Md Mesbah Uddin$^{1,*}$ \\
+    \texttt{$^{1,*}$sabbers@gmail.com}, \texttt{$^{1,*}$Mesbahuddin1991@gmail.com} \\
 }
-\date{\today}
 
+\date{\today}
 \begin{document}
 
 \maketitle
+\let\thefootnote\relax\footnote{{$^*$}These authors contributed equally to this work.}
+
 
 \begin{abstract}
-    \noindent We introduce a new machine learning based generator framework designed to help researchers who relys on simulations to study physical systems or processes. High computational costs and the resulting limited data often pose significant challenges to gaining insights into these systems or processes. In this two step approach, we first train a supervised predictive model using a small-scale simulated dataset with varying input parameters. The final step involves training a reinforcement learning agent that employs the supervised model to produce more accurate, simulation-like data. By leveraging this framework, researchers can generate more accurate data and know the outcomes without running high computational simulations. Which enables them to explore the parameter space more efficiently and gain deeper insights into physical systems or processes. In this paper, we demonstrate the effectiveness of the proposed framework by applying it to two case studies in material science and geodynamics.
+    \noindent In this paper, we present a machine learning-based data generator framework, tailored to aid researchers who utilize simulations to examine various physical systems or processes. High computational costs and the resulting limited data often pose significant challenges to gaining insights into these systems or processes. Our approach involves a two-step process: initially, we train a supervised predictive model using a limited simulated dataset to predict simulation outcome. Subsequently, a reinforcement learning agent is trained to generate accurate, simulation-like data by leveraging the supervised model. With this framework, researchers can generate more accurate data and know the outcomes without running high computational simulations. Which enables them to explore the parameter space more efficiently and gain deeper insights into physical systems or processes. In this paper, we demonstrate the effectiveness of the proposed framework by applying it to two case studies
+    one focusing on earthquake rupture physics and the other on new material development.
 \end{abstract}
 
 \maketitle
 
 \section{Introduction}
 
-Understanding physical systems or processes often involves the use of computational simulations, a method that can be both time-consuming and computationally expensive. These constraints can severely limit the amount of data available for research and impact our ability to gain deep insights into these systems or processes.
+Understanding physical systems or processes often involves the use of computational simulations, a method that can be both time-consuming and computationally expensive. For instance, simulating the weather and climate dynamics~\citep{washington2005introduction}, modeling complex biological systems like protein folding~\citep{shaw2010atomic}, or even understaing earthquake rupture process~\citep{harris2018suite} or seismic activities ~\citep{graves2011cybershake, shaw2018physics} requires a significant computational demands.These constraints can severely limit the amount of data available for research and impact our ability to gain deep insights into these systems or processes.
 
 In response to these challenges, we propose a novel machine learning-based generator framework designed to enhance the efficiency of data generation in studies that rely on simulations. This framework operates in a two-step approach. Initially, a supervised predictive model is trained using a small-scale simulated dataset with varying input parameters. This predictive model, functioning as a surrogate for the original physical simulations, is then used to train a reinforcement learning (RL) agent \cite{sutton2018reinforcement}. The RL agent, guided by the feedback from the predictive model, learns to generate more accurate, simulation-like data.
 
@@ -49,7 +50,7 @@ The proposed machine learning framework consists of two main components: (1) a s
         \includegraphics[scale=0.60]{figures/framework.png}
     \end{center}
     \caption{The schematic diagram shows how the framework works}
-    \label{fig:bnn-diagram}
+    \label{fig:framework-diagram}
 \end{figure}
 
 
@@ -65,21 +66,21 @@ The model's performance significantly influences the subsequent reinforcement le
 
 \subsection{RL Agent: Generate simulation like data}
 
-The reinforcement learning agent aims to develop a policy for generating input parameter combinations that is compatable with the supervised model and real life objective.  The agent's objective is to learn a policy that can maximize or minimize the outcome predicted by the supervised model.
+In our framework, the reinforcement learning agent learns how to generate data from random inputs (Figure-\ref{fig:framework-diagram}). This process is not arbitrary; it's guided by the supervised model, which ensures the generated parameters are contextually relevant. Through iterative learning and exploration, the agent develops an ability to manipulate these random inputs in a way that can maximize or minimize the outcome as predicted by the supervised model. This learning process enables the agent to produce data that closely aligns with the complex dynamics of the physical system or process under study.
 
 \subsubsection{Reward Function}
 
-The reward function, typically denoted as $R(s,a)$, is a vital component of the reinforcement learning (RL) process. Here, $s$ represents the current state and $a$ represents the action taken. In our context, the reward function is designed to incentivize the RL agent to generate high-quality input parameter combinations that lead to desirable simulation outcomes.
+The reward function, typically denoted as $R(s,a)$, is a vital component of the reinforcement learning (RL) process~\citep{abbeel2004apprenticeship, brunskill2013sample, ng2000algorithms}. Here, $s$ represents the current state and $a$ represents the action taken. In our context, the reward function is designed to incentivize the RL agent to generate high-quality input parameter combinations that lead to desirable simulation outcomes.
 
-The design of the reward function can vary depending on the specific objectives of the simulation. For instance, if the aim is to minimize the outcome predicted by the supervised model, denoted as $f(X_s)$, the reward function can be structured to give higher rewards for actions resulting in lower predicted outcomes. Conversely, if the aim is to maximize the outcome, the reward function can be designed to provide greater rewards for actions that result in higher predicted outcomes.
+The design of the reward function can vary depending on the specific objectives of the simulation~\cite{abbeel2004apprenticeship}. For instance, if the aim is to minimize the outcome predicted by the supervised model, denoted as $f(X_s)$, the reward function can be structured to give higher rewards for actions resulting in lower predicted outcomes. Conversely, if the aim is to maximize the outcome, the reward function can be designed to provide greater rewards for actions that result in higher predicted outcomes.
 
-This flexibility in defining the reward function allows our RL agent to adapt to various objectives, making our framework versatile and capable of generating high-quality data for a broad range of tasks.
+This flexibility in defining the reward function allows our RL agent to adapt to various objectives, making our framework versatile and capable of generating high-quality data for a broad range of tasks~\citep{sutton2018reinforcement, mnih2015human, lapan2018deep, karpathy2016deep}.
 
 \subsubsection{Policy Learning for Data Generation}
 
 In our proposed framework, the reinforcement learning (RL) agent learns a policy, denoted as $\pi_{\theta}(a|s)$, that determines the likelihood of choosing a particular action $a$ (or set of input parameters), given the current state $s$. Here, $\theta$ denotes the parameters of the policy. The goal of the RL agent is to learn an optimal policy, denoted as $\pi^*_{\theta}(a|s)$, that maximizes the expected cumulative reward, thereby leading to the generation of accurate, simulation-like data.
 
-The learning process is guided by the Bellman equation for policy iteration:
+The learning process is guided by the Bellman equation for policy iteration~\cite{sutton2018reinforcement}:
 
 \begin{equation}
     V^\pi(s) = \sum_{a} \pi_{\theta}(a|s) \left[R(s,a) + \gamma \sum_{s'} P(s'|s,a) V^\pi(s')\right]
@@ -90,10 +91,10 @@ In this equation, $V^\pi(s)$ represents the value of state $s$ under policy $\pi
 Through iterative updates of the value function and the policy, guided by the Bellman equation, the RL agent gradually learns the optimal policy. This learned policy can generate the best actions for each state, leading to the generation of high-quality, simulation-like data. For a more detailed discussion of the reinforcement learning process, please refer to \cite{sutton2018reinforcement}.
 
 \section{Case Studies}
-In this section, we will demonstrate the application and effectiveness of our framework through a series of case studies. The first case study focuses on the field of earthquake rupture physics, a complex and data-scarce area that significantly benefits from our approach. The second case study focuses on the field of material science, where our framework can be used to optimize processing conditions for developing high-performance materials.
+In this section, we will demonstrate the application and effectiveness of our framework through a two case studies. The first case study focuses on the field of earthquake rupture physics, a complex and data-scarce area that significantly benefits from our approach. The second case study focuses on the field of material science, where our framework can be used to optimize processing conditions for developing high-performance materials.
 
 \subsection{Earthquake Rupture Physics}
-Simulating dynamic earthquake rupture propagation poses significant challenges due to uncertainties in fault slip physics, stress conditions, and frictional properties. Numerical simulations, while essential in understanding rupture physics, are highly dependent on initial parameters, which are difficult to optimize given the vast parameter space. As a result,researchers often resort to simplifying assumptions or trial-and-error methods to generate simulations that can overlook complexities and are computationally expensive~\cite{ahamed2019estimating}.
+Simulating dynamic earthquake rupture propagation poses significant challenges due to uncertainties in fault slip physics, stress conditions, and frictional properties. Numerical simulations, while essential in understanding rupture physics, are highly dependent on initial parameters, which are difficult to optimize given the vast parameter space. As a result,researchers often resort to simplifying assumptions or trial-and-error methods to generate simulations that can overlook complexities and are computationally expensive~\citep{douilly20153d, ripperger2008variability, peyrat2001dynamic, ahamed2019estimating}
 
 \subsubsection{Rupture simulations and data processing}
 \begin{figure}[ht]
@@ -104,23 +105,23 @@ Simulating dynamic earthquake rupture propagation poses significant challenges d
     \label{fig:rupture_domain}
 \end{figure}
 
-In this example, we used 2000 simulated earthquake ruptures that were created by~\cite{ahamed2021application} to predict if an earthquake can break through a fault with geometric heterogeneity (figure.~\ref{fig:rupture_domain}). The domain is 32 km long and 24 km wide. An open-source \texttt{C++} and \texttt{python} based library $\texttt{fdfault}$~\cite{fdfaultEricGithub} was used to generate the ruptures.
+In this example, we used 2000 simulated earthquake ruptures that were created by~\cite{ahamed2021application} to predict if an earthquake can break through a fault with geometric heterogeneity (Figure.~\ref{fig:rupture_domain}). The domain is 32 km long and 24 km wide. An open-source \texttt{C++} and \texttt{python} based library $\texttt{fdfault}$~\cite{fdfaultEricGithub} was used to generate the ruptures.
 
 In each simulation, eight parameters were varied: x and y components of normal stress ($\sigma_{xx}$ and $\sigma_{yy}$), shear stress ($\sigma_{xy}$), dynamic friction coefficient, friction drop ($\mu_{s} - \mu_{d}$), critical slip distance ($d_c$), and width and height of the geometric heterogeneity at the center.
 
 \subsubsection{Supervised Model to Predict Earthquake Rupture}
 
-We trained a supervised machine learning model to predict earthquake rupture outcomes based on the given input parameters. We used 1600 simulations data for training and 400 simulations data for testing. The model was trained to predict the rupture outcome, which is a binary variable that takes the value 1 if the rupture breaks through the barrier and 0 otherwise.
+We used \texttt{LightGBM}~\cite{ke2017lightgbm}, a gradient boosting decision tree-based algorithm, to train a supervised machine learning model with the objective of predicting earthquake rupture outcomes. This training was conducted on a dataset of 1600 simulation instances, with an additional 400 simulations used for model validation. The target variable for prediction was the binary rupture outcome, coded as '1' when the rupture successfully breaks through the barrier, and '0' when it does not.
 
-To enhance the model's predictive capabilities, we created additional features. Such as width height ratio, normal stress difference ($\sigma_{xx} - \sigma_{yy}$), friction product ($\mu_{d} - sdrop$). These features were derived from the original parameters to capture more complex relationships in the data.
+To enhance the model's predictive capabilities, we created additional features. These included the ratio of width to height, the difference in normal stresses ($\sigma_{xx} - \sigma_{yy}$), and the friction product ($\mu_{d} - sdrop$), among others. These features were derived from the original parameters to capture more complex relationships in the data.
 
 The model was then trained using the expanded feature set and evaluated on the test data. The model performed quite well, achieving a ROC-AUC score of 0.8991 and a macro F1 score of 0.8266. The confusion matrix showed a good balance between sensitivity and specificity, with 100 true positives, 239 true negatives, 33 false positives, and 28 false negatives.
 
 \subsubsection{Reinforcement Learning to Generate Rupture Parameters}
 
-To generate realistic earthquake rupture parameters, a reinforcement learning (RL) technique was incorporated into our framework, utilizing the trained supervised model described above. The RL agent was trained to generate rupture parameters that would lead to a rupture outcome similar to the training data. The RL agent was trained using the Proximal Policy Optimization (PPO) algorithm, a popular choice for its balance between sample complexity and computational cost~\cite{schulman2017proximal}.
+We used \texttt{Stable-baseline-3}~\cite{stable-baselines3}, a reinforcement learning library, to train an RL agent. The agent's goal was to create rupture parameters that would produce a rupture outcome mirroring that of the training data. We trained the RL agent using the Proximal Policy Optimization (PPO) algorithm\cite{schulman2017proximal}, a commonly preferred method due to its effective balance between sample complexity and computational demand.
 
-The reward function is crucial in this setup. It guides the RL agent by providing feedback on the quality of the generated parameters. The generated parameters are used to predict an earthquake rupture outcome using the supervised model. If the predicted outcome is out of the valid range or if the generated parameters are physically implausible (for example, if height or width is negative), a negative reward is given. Otherwise, a positive reward is granted, encouraging the RL agent to generate similar parameter combinations in the future. This mechanism ensures the RL agent learns to produce plausible and high-quality data over time, enhancing the effectiveness of our earthquake rupture prediction framework.
+The reward function is crucial in this setup. We used supervised model to guide the RL agent by providing feedback on the quality of the generated parameters. The generated parameters are used to predict an earthquake rupture outcome using the supervised model. If the predicted outcome is out of the valid range or if the generated parameters are physically implausible (for example, if height or width is negative), a negative reward is given. Otherwise, a positive reward is granted, encouraging the RL agent to generate similar parameter combinations in the future. This mechanism ensures the RL agent learns to produce plausible and high-quality data over time, enhancing the effectiveness of our earthquake rupture prediction framework.
 
 
 
@@ -133,7 +134,7 @@ The reward function is crucial in this setup. It guides the RL agent by providin
     \label{fig:label_distribution}
 \end{figure}
 
-The reinforcement learning (RL) agent's capability to generate a continuous range of rupture outcomes, as opposed to the binary outcomes of the original training data, offers significant benefits. As depicted in the figure-\ref{fig:label_distribution}, the RL-generated data (b) encompasses a richer and more nuanced spectrum of values between 0 and 1, unlike the training data (a) that is limited to outcomes of 0 and 1. This wider range of outcomes generated by the RL agent provides a more detailed insight into the complex rupture process, enhancing the predictive model's performance by offering varied and comprehensive training data. Thus, the RL agent's role in data generation is pivotal to improving the overall understanding and prediction of earthquake ruptures.
+We used our reinforcement learning (RL) agent to generate 5000 data points, from which we filtered those that fall within the prediction range of the supervised model. As illustrated in Figure-\ref{fig:label_distribution}, the data produced by the RL agent spans a broader and more nuanced spectrum of values between 0 and 1, in contrast to the training data which is comprising of only 0s and 1s. This wider range of outcomes generated by the RL agent provides a more detailed insight into the complex rupture process, enhancing the predictive model's performance by offering varied and comprehensive training data. Thus, the RL agent's role in data generation is pivotal to improving the overall understanding and prediction of earthquake ruptures.
 
 \begin{figure}[ht]
     \begin{center}
@@ -149,7 +150,7 @@ Figure-\ref{fig:height_width_stress_scatter} presents a 2D scatter plot, demonst
     \begin{center}
         \includegraphics[scale=0.50]{figures/contour.png}
     \end{center}
-    \caption{Plot shows the contour of the rupture outcome. (a) height and width (b) normal and shear stress}
+    \caption{Plot shows the contour of the rupture outcome. The dots with color represents the probability(a) height and width of the fault barrier (b) normal and shear stress of the fault}
     \label{fig:contour}
 \end{figure}
 
@@ -193,14 +194,14 @@ depending on the penetration depth). The indenter speed was set to 100 m/s for n
 m/s for nano-scratching, with a scratching length of 20 nm.
 
 \subsubsection{Supervised Learning to Generate Material Data}
-We developed a supervised learning model to predict the frictional coefficient along the scratching distance.
+We also used \texttt{LightGBM}~\cite{ke2017lightgbm} to develop a supervised learning model to predict the frictional coefficient along the scratching distance.
 The model was trained on 23 of these models, validated on 5, and tested on the remaining 7 models. To create a unique model, we combined the model layers with indenter radius and penetration depth. Then for each model, we collected frictional coefficient from different scratching data points.
 
 \begin{figure}[!h]
     \begin{center}
         \includegraphics[scale=0.30]{figures/material_fric_pred.png}
     \end{center}
-    \caption{Predicted frictional coefficient along the scratching distance for the test data on different models test simulations. Each unique model name, like '6\_2\_9\_1\_d7\_r10', encodes key properties: '6\_2\_9\_1\_' corresponds to the thickness of each material layer, 'd7' specifies a 7 nm indenter depth, and 'r10' represents a 10 nm indenter radius.}
+    \caption{Predicted frictional coefficient along the scratching distance for the test data on different models test simulations. Each unique model name, like '6\_2\_9\_1\_d7\_r10', encodes key properties: '6\_2\_9\_1' corresponds to the thickness of each material layer, 'd7' specifies a 7 nm indenter depth, and 'r10' represents a 10 nm indenter radius.}
 
     \label{fig:material_fric_pred}
 \end{figure}
@@ -211,7 +212,7 @@ The performance of the supervised learning model was robust, with an R-squared v
 Figure-\ref{fig:material_fric_pred} displays the predicted frictional coefficient over the course of scratching for various test models. Despite the limited size of the training dataset, the model appears to predict well across the test simulations. However, the figure also indicates a difficulty in accurately predicting models with larger indenter radius, as exemplified by the model where intender raius is 20.
 
 
-\subsection{Limitations}
+\section{Limitations}
 
 Our approach, while innovative, is not without limitations. The quality of the generated data and subsequent insights are tied to the quality of the training data provided to the RL agent. Any biases or gaps in this data could impact the efficacy of the RL agent's learning. Similarly, the supervised learning model's effectiveness is reliant on the richness and diversity of its training data. The current reward function design, although functional, may oversimplify the problem and limit the RL agent's ability to learn complex relationships or adapt for nuanced goals. Additionally, despite the RL agent's broad exploration capabilities, it is still constrained by the defined action and state spaces. Future work should aim to address these limitations, thereby enhancing the robustness and versatility of this model.
 
