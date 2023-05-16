@@ -3,3 +3,51 @@ logs
 mlruns
 .DS_Store
 paper/ml_freamework_earthquake.aux
+
+# .gitignore
+
+# Python
+*.pyc
+*~
+__pycache__
+myenv/
+db.sqlite3
+.DS_Store
+*.log
+*.pot
+*.py[co]
+migrations/
+venv/
+.idea/
+.vscode/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# LaTeX
+*.aux
+*.glo
+*.idx
+*.log
+*.toc
+*.ist
+*.acn
+*.acr
+*.alg
+*.bbl
+*.blg
+*.dvi
+*.glg
+*.gls
+*.ilg
+*.ind
+*.lof
+*.lot
+*.maf
+*.mtc
+*.mtc1
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+
